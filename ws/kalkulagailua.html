@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kalkulagailua</title>
+        <style>
+            div {
+                visibility: hidden;
+            }
+        </style>
+        <script language = "javascript">
+            
+            //console.log("consolan!");
+            /* Balidazioa egiteko funtzioa. */
+            function kalkulatu(){
+                lehena = document.getElementById("lehenengoa");
+                op = document.getElementById("operazioa");
+                bigarrena = document.getElementById("bigarrena");
+                emaitza = document.getElementById("emaitza");
+                
+                var pic;
+                var out;
+
+                if(emaitza.value!=""){
+                    switch(op.value){
+                        case "+": 
+                            if((parseInt(lehena.value) + parseInt(bigarrena.value)) == parseInt(emaitza.value)){
+                                console.log("if barruan");
+                                pic = "https://www.clker.com/cliparts/s/1/v/q/p/N/black-check-mark-hi.png";
+                                document.getElementById("mezua").innerHTML = "ONDO!";
+                                document.getElementById("mezua").style.color="green";
+                            } else {
+                                console.log("else barruan");
+                                 pic = "https://image.flaticon.com/icons/png/512/1/1766.png";
+                                 document.getElementById("mezua").innerHTML = "GAIZKI!";
+                                document.getElementById("mezua").style.color="red";
+                            }
+                            break;
+                        case "-": 
+                            if((lehena.value-bigarrena.value) == emaitza.value){
+                                pic = "https://www.clker.com/cliparts/s/1/v/q/p/N/black-check-mark-hi.png";
+                                document.getElementById("mezua").innerHTML = "ONDO!";
+                                document.getElementById("mezua").style.color="green";
+                            } else {
+                                 pic = "https://image.flaticon.com/icons/png/512/1/1766.png";
+                                 document.getElementById("mezua").innerHTML = "GAIZKI!";
+                                document.getElementById("mezua").style.color="red";
+                            }
+                            break;    
+                        case "*":
+                            if((lehena.value*bigarrena.value) == emaitza.value){
+                                pic = "https://www.clker.com/cliparts/s/1/v/q/p/N/black-check-mark-hi.png";
+                                document.getElementById("mezua").innerHTML = "ONDO!";
+                                document.getElementById("mezua").style.color="green";
+                            } else {
+                                 pic = "https://image.flaticon.com/icons/png/512/1/1766.png";
+                                 document.getElementById("mezua").innerHTML = "GAIZKI!";
+                                document.getElementById("mezua").style.color="red";
+                            }
+                            break;
+                        case "/":
+                            if(bigarrena.value!="0"){
+                                if((lehena.value/bigarrena.value) == emaitza.value){
+                                     pic = "https://www.clker.com/cliparts/s/1/v/q/p/N/black-check-mark-hi.png";
+                                     document.getElementById("mezua").innerHTML = "ONDO!";
+                                     document.getElementById("mezua").style.color="green";
+                                } else {
+                                    pic = "https://image.flaticon.com/icons/png/512/1/1766.png";
+                                    document.getElementById("mezua").innerHTML = "GAIZKI!";
+                                    document.getElementById("mezua").style.color="red";
+                                }
+                            } else
+                                window.alert("Ezin da zati 0 egin! Sartu beste balioak");
+                            break;
+                    }
+                        
+                    console.log("switch amaitua");
+                    document.getElementById("mezua").style.visibility = "visible";
+					document.getElementById("irudia").style.visibility = "visible";
+					document.getElementById("irudia").src = pic;
+                }
+                
+                
+            }
+            
+            /* Input guztien balioak ezabatzeko eta erantzuna ezabatzeko funtzioa, parametrorik gabekoa. */
+            function ezabatu(){
+                console.log("ezabatu barruan");
+                document.getElementById("lehenengoa").value=null;
+                document.getElementById("operazioa").value="+";
+                document.getElementById("bigarrena").value=null;
+                document.getElementById("emaitza").value=null;
+                document.getElementById("mezua").style.visibility = "hidden";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Kalkulatzen</h1>
+
+       <form>
+           <input id="lehenengoa">
+           <select id="operazioa">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+           </select>
+           <input id="bigarrena"> = 
+           <input id="emaitza" oninput="kalkulatu()">
+           <button type="button" onclick="ezabatu()">Ezabatu</button>
+           <div>
+               <img id="irudia" width="50" height="50">
+               <p id="mezua"></p>
+           </div>
+           
+       </form>
+        
+    </body>
+</html>
